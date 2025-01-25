@@ -4,8 +4,6 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, Dataset
 import csv
 
-import reduc_dim
-
 
 # Define the dataset class
 class CustomDataset(Dataset):
