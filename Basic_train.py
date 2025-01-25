@@ -82,8 +82,8 @@ def evaluate_model(model, test_loader):
 # Main script
 if __name__ == "__main__":
     # Load datasets
-    train_dataset = CustomDataset('training3.csv')
-    test_dataset = CustomDataset('test13.csv')
+    train_dataset = CustomDataset('data/training3.csv')
+    test_dataset = CustomDataset('data/test13.csv')
 
     # Create DataLoaders
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
