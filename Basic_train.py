@@ -4,6 +4,8 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, Dataset
 import csv
 
+import reduc_dim
+
 
 # Define the dataset class
 class CustomDataset(Dataset):
@@ -16,7 +18,7 @@ class CustomDataset(Dataset):
             next(reader)
             for row in reader:
                 co = row[:-1]
-                self.data.append([float(i) for i in co])  # All columns except last as features
+                self.data.append([float(i) for i in co])
                 self.labels.append(int(row[-1]))  # Last column as label
 
     def __len__(self):
@@ -25,6 +27,10 @@ class CustomDataset(Dataset):
     def __getitem__(self, idx):
         return (torch.tensor(self.data[idx], dtype=torch.float32),
                 torch.tensor(self.labels[idx], dtype=torch.long))
+
+    def PCA(self, ncomponent):
+        # réduit la dimensionnalité des données
+        self.data = reduc_dim.pca(self.data, ncomponent)
 
 
 # Define a simple neural network model
@@ -41,9 +47,8 @@ class NeuralNet(nn.Module):
         x = self.fc2(x)
         return x
 
-
 # Training function
-def train_model(model, train_loader, criterion, optimizer, num_epochs=20):
+def train_model(model, train_loader, criterion, optimizer, num_epochs=30):
     model.train()
     for epoch in range(num_epochs):
         running_loss = 0.0
@@ -75,25 +80,23 @@ def evaluate_model(model, test_loader):
 # Main script
 if __name__ == "__main__":
     # Load datasets
-    train_dataset = CustomDataset('training3.csv')
-    test_dataset = CustomDataset('test13.csv')
+    train_dataset = CustomDataset('traininggg.csv')
+    test_dataset = CustomDataset('testinggg.csv')
 
-    # Create DataLoaders
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
     test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
-    # Define model parameters
-    input_size = len(train_dataset[0][0])  # Number of features
+    input_size = len(train_dataset[0][0])
     hidden_size = 64
-    num_classes = len(set([label for _, label in train_dataset]))  # Number of classes
+    num_classes = 2#len(set([label for _, label in train_dataset]))
+    print(input_size)# Number of classes
 
-    # Initialize the model, loss function, and optimizer
     model = NeuralNet(input_size, hidden_size, num_classes)
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=0.001)
+    optimizer = optim.Adam(model.parameters(), lr=0.0001)
 
     # Train the model
-    train_model(model, train_loader, criterion, optimizer, num_epochs=20)
+    train_model(model, train_loader, criterion, optimizer, num_epochs=100)
 
     # Evaluate the model
     evaluate_model(model, test_loader)
