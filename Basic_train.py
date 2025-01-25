@@ -4,6 +4,8 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, Dataset
 import csv
 
+import reduc_dim
+
 
 # Define the dataset class
 class CustomDataset(Dataset):
@@ -25,6 +27,11 @@ class CustomDataset(Dataset):
     def __getitem__(self, idx):
         return (torch.tensor(self.data[idx], dtype=torch.float32),
                 torch.tensor(self.labels[idx], dtype=torch.long))
+    
+    def PCA(self,ncomponent):
+        #réduit la dimensionnalité des données
+        self.data = reduc_dim.pca(self.data,ncomponent)
+
 
 
 # Define a simple neural network model
