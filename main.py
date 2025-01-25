@@ -1,8 +1,8 @@
 import csv
 
 # Open the original file and process the data
-input_csv = 'train.csv'
-output_csv = 'test13.csv'
+input_csv = 'data/train.csv'
+output_csv = 'data/test13.csv'
 
 with open(input_csv, 'r') as infile, open(output_csv, 'w', newline='') as outfile:
     reader = csv.reader(infile)
