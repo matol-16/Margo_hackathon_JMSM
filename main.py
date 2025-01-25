@@ -1,9 +1,9 @@
 import csv
 
 iteration = 4
-input_csv = 'train.csv'
-output1_csv = 'training_'+str(iteration)+'.csv'
-output2_csv = 'test_'+str(iteration)+'.csv'
+input_csv = 'data/train.csv'
+output1_csv = 'data/training_'+str(iteration)+'.csv'
+output2_csv = 'data/test_'+str(iteration)+'.csv'
 
 with open(input_csv, 'r') as infile, open(output1_csv, 'w', newline='') as outfile1, open(output2_csv, 'w', newline='') as outfile2:
     reader = csv.reader(infile)
