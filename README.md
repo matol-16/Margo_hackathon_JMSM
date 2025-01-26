@@ -2,7 +2,7 @@
 # Margo_hackathon_JMSM
 This project was carried out by a team of four  as part of a hackathon organized by Margo, IBM, and Qubitpharmaceuticals at école Polytechnique on 24-26/01/2025. Starting with no prior knowledge in Machine learning, our goal was to use Machine Learning models to predict molecular toxicity using chemical and biological information.
 
-# Our team ranked 3rd out of 14 teams, achieving a Cohen-Kappa score of 0.599 on the testing data provided by the organizers. 
+**Our team ranked 3rd out of 14 teams**, achieving a Cohen-Kappa score of 0.599 on the testing data provided by the organizers. 
 
 
 ## Methods/models used
